@@ -1,0 +1,21 @@
+%h1 Manage Users
+
+.table-button.pull-right
+  = link_to 'Create New User', new_admin_user_path, :class => 'btn btn-success'
+
+.clearfix
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th ID
+    %th Username
+    %th Email
+    %th Actions
+  - @users.each do |user|
+    %tr
+      %td= user.id
+      %td= user.username
+      %td= user.email
+      %td
+        = link_to 'Edit', '#', :class => 'btn'
+        = link_to 'Delete', admin_user_path(user), :class => 'btn btn-danger', :method => :delete
