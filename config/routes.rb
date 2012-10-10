@@ -1,4 +1,6 @@
 Housekeeping::Application.routes.draw do
+  get "users/index"
+
   get "user/index"
 
   get "user/about"
@@ -6,6 +8,10 @@ Housekeeping::Application.routes.draw do
   devise_for :users
 
   get "dashboard/index"
+
+  namespace :admin do
+    resources :users, :only => [:index, :new, :create, :destroy]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

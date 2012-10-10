@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :role
 
+  validates_uniqueness_of :username
+
   has_and_belongs_to_many :roles, :join_table => 'user_roles'
   has_one :profile, :dependent => :delete
 

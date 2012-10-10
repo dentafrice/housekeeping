@@ -1,0 +1,18 @@
+!!! 5
+%html(lang="en")
+  %head= render :partial => 'shared/header'
+
+
+  %body
+    = render :partial => 'shared/navbar'
+    .container-fluid
+      .row-fluid
+        #content.span12
+          .span3
+            #content.well.logged-out= yield
+          .span9
+            This website utilizes Housekeeping, a free and open source radio management panel.
+
+      %footer= footer_message
+
+    = javascript_include_tag "application"

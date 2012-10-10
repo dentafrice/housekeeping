@@ -6,6 +6,8 @@ class Ability
 
     if user.role? :super_admin
       can :manage, :all
+    elsif user.role? :admin
+      can :manage, User
     elsif user.role? :general_team
       # General Team Member
     end

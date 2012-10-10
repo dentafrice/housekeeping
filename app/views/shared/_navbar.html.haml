@@ -1,0 +1,17 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    .container-fluid
+      - if user_signed_in?
+        .pull-right
+          %ul.nav
+            %li= link_to "Logout #{current_user.username.titleize}", destroy_user_session_url, :method => :delete
+
+      %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => root_url} Housekeeping
+      .container.nav-collapse
+        - if user_signed_in?
+          %ul.nav
+            %li= link_to "Home", dashboard_index_path

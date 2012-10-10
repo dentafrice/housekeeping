@@ -1,0 +1,13 @@
+- if user_signed_in?
+  .span3
+    .well.sidebar-nav
+      %ul.nav.nav-list
+        %li.nav-header Sidebar
+        %li= link_to "About User", user_about_path
+        %li= link_to "Link 2", "/path2"
+        %li= link_to "Link 3", "/path3"
+  #content.span9
+    = yield
+- else
+  #content.span12
+    = yield
