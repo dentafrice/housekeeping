@@ -31,7 +31,7 @@ describe DashboardController do
 
       it "should redirect back to the login page" do
         get :index
-        flash[:error].should =~ /suspended/
+        flash[:alert].should =~ /suspended/
         response.should redirect_to(new_user_session_path)
       end
     end
