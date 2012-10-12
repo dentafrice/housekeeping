@@ -38,6 +38,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_admin?
+    self.has_any_role? :admin, :super_admin
+  end
+
+  def manageable_users
+    if self.has_role? :super_admin
+      return User.all
+    elsif self.has_role? :admin
+      return User.all.select{ |user| !user.has_role?(:super_admin) }
+    else
+      return [self]
+    end
+  end
+
   private
   def create_profile
     self.build_profile.save

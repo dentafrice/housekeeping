@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   before_filter :banned?
 
+  def not_authorized
+    flash[:alert] = "Sorry, you do not have access to this resource."
+    redirect_to dashboard_index_path
+  end
+
   protected
   def layout_by_resource
     if devise_controller?

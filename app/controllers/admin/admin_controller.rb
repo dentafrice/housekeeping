@@ -1,10 +1,14 @@
 class Admin::AdminController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize_admin
 
-  def authorize
-    #unless current_user.role? :admin
-    #  flash[:alert] = "You do not have access to this page."
-    #  redirect_to dashboard_index_path
-    #end
+  rescue_from CanCan::AccessDenied do
+    not_authorized
+  end
+
+  protected
+  def authorize_admin
+    unless current_user.is_admin?
+      not_authorized
+    end
   end
 end

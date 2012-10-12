@@ -1,8 +1,12 @@
 class Admin::UsersController < Admin::AdminController
   before_filter :authorize
+  load_and_authorize_resource
 
   def index
-    @users = User.all
+    @users = current_user.manageable_users
+  end
+
+  def show
   end
 
   def new
@@ -21,12 +25,10 @@ class Admin::UsersController < Admin::AdminController
 
   def destroy
     @user = User.find(params[:id])
-
     render :text => "Hey!"
   end
 
   def authorize(user = nil)
-    authorize! :manage, User
     authorize! :manage, user unless user.nil?
   end
 end
