@@ -1,0 +1,21 @@
+= form_for [:admin, @user], :html => {:class => 'form-horizontal'} do |f|
+  = display_errors(@user.errors.full_messages)
+  .control-group
+    = f.label :username, :class => 'control-label'
+    .controls= f.text_field :username, :autocomplete => :off
+
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls= f.email_field :email, :autocomplete => :off
+
+  .control-group
+    = f.label :password, :class => 'control-label'
+    .controls= f.password_field :password
+
+  .control-group
+    = f.label :password_confirmation, :class => 'control-label'
+    .controls= f.password_field :password_confirmation
+
+  .form-actions
+    = f.submit "Save", :class => 'btn btn-primary'
+    = link_to "Cancel", admin_users_path, :class => 'btn'

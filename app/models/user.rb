@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :role
 
+  validates_presence_of :username
   validates_uniqueness_of :username
   before_save :ensure_roles
 

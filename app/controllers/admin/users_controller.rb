@@ -28,6 +28,24 @@ class Admin::UsersController < Admin::AdminController
     render :text => "Hey!"
   end
 
+  def edit
+  end
+
+  def update
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    @user.update_attributes(params[:user])
+
+    if @user.save
+      redirect_to admin_users_path
+    else
+      render :edit
+    end
+  end
+
   def authorize(user = nil)
     authorize! :manage, user unless user.nil?
   end

@@ -10,7 +10,7 @@ Housekeeping::Application.routes.draw do
   get "dashboard/index"
 
   namespace :admin do
-    resources :users, :only => [:index, :new, :create, :destroy, :show]
+    resources :users
   end
 
   # The priority is based upon order of creation:
