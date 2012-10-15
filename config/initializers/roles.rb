@@ -1,0 +1,1 @@
+APP_ROLES = YAML::load(File.open('config/roles.yml'))

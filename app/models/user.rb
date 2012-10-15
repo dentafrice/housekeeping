@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
   validates_uniqueness_of :username
-  before_save :ensure_roles
+
+  after_save :ensure_roles
 
   has_one :profile, :dependent => :delete
 
@@ -58,9 +59,8 @@ class User < ActiveRecord::Base
     self.build_profile.save
   end
 
+  # If users have no roles, when saved give them a role.
   def ensure_roles
-    if self.roles.count == 0
-      self.add_role :staff
-    end
+    self.add_role :staff if self.roles.count == 0
   end
 end
